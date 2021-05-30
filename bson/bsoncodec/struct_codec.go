@@ -466,7 +466,9 @@ func (sc *StructCodec) describeStruct(r *Registry, t reflect.Type) (*structDescr
 			// field is private or unexported fields aren't allowed, ignore
 			continue
 		}
-
+		if sf.Anonymous&&sf.Tag=="" {
+			continue
+		}
 		sfType := sf.Type
 		encoder, err := r.LookupEncoder(sfType)
 		if err != nil {
